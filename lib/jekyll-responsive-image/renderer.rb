@@ -15,7 +15,7 @@ module Jekyll
         result = use_cache ? RenderCache.get(cache_key) : nil
 
         if result.nil?
-          image = ImageProcessor.process(@attributes['path'], config)
+          image = ImageProcessor.process(@attributes['path'], config, @attributes['widths'])
           @attributes['original'] = image[:original]
           @attributes['resized'] = image[:resized]
 
