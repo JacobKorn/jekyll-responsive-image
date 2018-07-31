@@ -3,12 +3,14 @@ module Jekyll
     class ResizeHandler
       include ResponsiveImage::Utils
 
-      def resize_image(img, config)
+      def resize_image(img, config, custom_sizes = nil)
         img.auto_orient! if config['auto_rotate']
+
+        sizes = custom_sizes ? custom_sizes : config['sizes']
 
         resized = []
 
-        config['sizes'].each do |size|
+        sizes.each do |size|
           width = size['width']
           ratio = width.to_f / img.columns.to_f
           height = (img.rows.to_f * ratio).round
