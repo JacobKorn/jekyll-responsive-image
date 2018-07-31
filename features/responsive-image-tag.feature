@@ -5,6 +5,16 @@ Feature: Jekyll responsive_image tag
     When I run Jekyll
     Then I should see "<img alt=\"Foobar\" src=\"/assets/everybody-loves-jalapeño-pineapple-cornbread.png\"" in "_site/index.html"
 
+  Scenario: Accept a Variable for path
+    Given I have a responsive_image configuration with "template" set to "_includes/responsive-image.html"
+    And I have a file "index.html" with:
+      """
+      {% assign path = 'assets/everybody-loves-jalapeño-pineapple-cornbread.png' %}
+      {% responsive_image path: path alt: Foobar %}
+      """
+    When I run Jekyll
+    Then I should see "<img alt=\"Foobar\" src=\"/assets/everybody-loves-jalapeño-pineapple-cornbread.png\"" in "_site/index.html"
+
   Scenario: Global variables available in templates
     Given I have a file "index.html" with "{% responsive_image path: assets/everybody-loves-jalapeño-pineapple-cornbread.png %}"
     And I have a configuration with:
